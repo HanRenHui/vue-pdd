@@ -6,7 +6,10 @@ const RECLIST = 'reqRecList';
 const REWRITE = 'rewriteuserinfo';
 const AUTOLOGIN = 'autologin';
 const EDIT = 'editlogin';
-
+const CHANGECOUNT = 'changeCount';
+const DELETE = 'delete';
+const CHECKONE = 'checkone';
+const ALLSELECT = 'allselect';
 export {
   TAB_DATA,
   CAROU_IMG,
@@ -15,5 +18,10 @@ export {
   RECLIST,
   REWRITE,
   AUTOLOGIN,
-  EDIT
+  EDIT,
+  CHANGECOUNT,
+  DELETE,
+  CHECKONE,
+  ALLSELECT,
+  
 };

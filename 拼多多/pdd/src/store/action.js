@@ -6,7 +6,11 @@ import {
   RECLIST,
   REWRITE,
   AUTOLOGIN,
-  EDIT
+  EDIT,
+  CHANGECOUNT,
+  DELETE,
+  CHECKONE,
+  ALLSELECT
 } from './mutation-type';
 
 import {
@@ -84,5 +88,24 @@ export default {
     if(result.status === 200){
       commit(EDIT);
     }
+  },
+  // 更新数量
+  resetCount({commit}, {index, flag}){
+    commit(CHANGECOUNT, {index, flag});
+  },
+
+  // 删除一件商品
+  deleteGood({commit}, index){
+    commit(DELETE, index);
+  },
+
+  // 更改选中状态
+  check({commit}, index){
+    commit(CHECKONE, index);
+  },
+  // 全选
+  selectAll({commit}, allCheckFlag){
+    commit(ALLSELECT, allCheckFlag);
   }
+
 }

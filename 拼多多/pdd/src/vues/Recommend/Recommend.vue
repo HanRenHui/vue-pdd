@@ -1,19 +1,21 @@
 <template>
   <div class="recommend" v-if="User._id">
-    <div class="rec-item" v-for="(good, index) in ReqList" :key=index>
-      <img :src="good.hd_thumb_url" alt="">
-      <p>{{good.goods_name}}</p>
-      <span class="tag" v-for="(tag, item) in good.tag_list" :key= item>
-        {{tag.text}}
-      </span>
-      <div class="item-bottom">
-        <div class="item-b-left">
-          <span class="price">￥{{good.price/100}}</span>
-          <span class="sales_tip">{{good.sales_tip}}</span> 
+    <!--mescroll滚动区域的基本结构-->
+			      <!--内容...-->
+      <div class="rec-item" v-for="(good, index) in ReqList" :key=index>
+        <img :src="good.hd_thumb_url" alt="">
+        <p>{{good.goods_name}}</p>
+        <span class="tag" v-for="(tag, item) in good.tag_list" :key= item>
+          {{tag.text}}
+        </span>
+        <div class="item-bottom">
+          <div class="item-b-left">
+            <span class="price">￥{{good.price/100}}</span>
+            <span class="sales_tip">{{good.sales_tip}}</span> 
+          </div>
+          <button class="item-b-right">发现 ></button>
         </div>
-        <button class="item-b-right">发现 ></button>
       </div>
-    </div>
   </div>
   <login_select v-else/>
 </template>
@@ -21,18 +23,20 @@
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
 import login_select from './../Login/Login_select';
+import axios from 'axios'
+
 export default {
   name: 'Recommend',
   data() {
     return {
-
     }
   },
   components: {
-    login_select
+    login_select,
   },
   mounted(){
     this.$store.dispatch('recommendList');
+   
   },
   computed: {
     ...mapState([
@@ -45,13 +49,13 @@ export default {
 
 <style scoped lang="stylus">
   .recommend 
-    display flex
-    flex-wrap wrap
-    justify-content space-between
     width 100%
     background #f5f5f5
     font-family "微软雅黑"
     margin-bottom 4.8rem
+    display flex
+    flex-wrap wrap
+    justify-content space-between
     .rec-item
       width 49.5%
       background #fff

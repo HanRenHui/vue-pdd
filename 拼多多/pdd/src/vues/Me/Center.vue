@@ -6,7 +6,7 @@
         <div class="center-header-top-left">
           <img src="./images/me_icon.png" alt="">
           <div class="center-header-top-left-me">
-            <p v-if="User.phone">{{User.phone}}</p>
+            <p v-if="User.phone">{{User.phone | userPhone}}</p>
             <p v-else>
               <!-- 17336624466 -->
                 请填写电话号码
@@ -127,8 +127,7 @@
 
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex'
-import { Toast } from 'mint-ui';
-
+import { Toast, MessageBox } from 'mint-ui';
 export default {
   name: 'center',
   data() {
@@ -141,14 +140,30 @@ export default {
       'User'
     ])
   },
+  filters: {
+    userPhone(phone){
+      let tempArr = phone.split('');
+      let newArr = [];
+      tempArr.forEach((value, index)=>{
+        if(index >= 3 && index <= 6){
+          value = '*';
+        }
+        newArr.push(value)
+      });
+      return newArr.join('');
+    }
+  },
   methods: {
     edit(){
-      this.$store.dispatch('edit_login');
-      Toast({
-        message: '退出成功',
-        position: 'top',
-        duration: 1000,
+      MessageBox.confirm('您确定退出么?').then(action => {
+         this.$store.dispatch('edit_login');
+        Toast({
+          message: '退出成功',
+          position: 'top',
+          duration: 1000,
+        });
       });
+     
     }
   }
 }
