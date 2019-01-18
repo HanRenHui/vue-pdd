@@ -1,0 +1,34 @@
+{
+  "imgUrl": [
+    {
+      "normalSrc": "http://localhost:1688/images/icon_home.png", 
+      "checkedSrc": "http://localhost:1688/images/icon_home_selected.png",
+      "title": "首页", 
+      "path": "/home"
+    },
+    {
+      "normalSrc": "http://localhost:1688/images/icon_intro.png", 
+      "checkedSrc": "http://localhost:1688/images/icon_intro_selected.png", 
+      "title": "推荐",
+      "path": "/recommend"
+    },
+    {
+      "normalSrc": "http://localhost:1688/images/icon_search.png", 
+      "checkedSrc": "http://localhost:1688/images/icon_search_selected.png",
+      "title": "搜索", 
+      "path": "/search"
+    },
+    {
+      "normalSrc": "http://localhost:1688/images/icon_chat.png",
+      "checkedSrc": "http://localhost:1688/images/icon_chat_selected.png",
+      "title": "购物车", 
+      "path": "/cart"
+    },
+    {
+      "normalSrc":  "http://localhost:1688/images/icon_mine.png",
+      "checkedSrc":  "http://localhost:1688/images/icon_mine_selected.png",
+      "title": "个人中心", 
+      "path": "/me"
+    }
+  ]
+}
