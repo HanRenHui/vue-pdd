@@ -144,7 +144,7 @@ export default {
       }
     },
 
-    // 监听登陆按钮
+    // 手机验证码登陆方式
     async login(){
       if(!this.phone || !this.client_code ){
          Toast({
@@ -157,15 +157,20 @@ export default {
       let result = await phone_login({phone: this.phone, code: this.client_code});
       if(result.status === 200){
         let data = result.data;
-        console.log(data);
-        
         let message = data.message;
         Toast({
           message,
           position: 'top',
           duration: 1000,
         });
-
+         // 更新state中的个人信息
+        this.$store.dispatch('rewriteUserInfo', {
+          _id: data._id,
+          name: data.name,
+          phone: data.phone
+        });
+        // 路由跳转
+        this.$router.back();
       }
 
     },

@@ -102,9 +102,8 @@ router.get('/api/phone_code', (req, res)=>{
 // 手机号码登陆
 router.post('/api/login/phone', (req, res) => {
   let phone = req.body.phone;
-  let code = req.body.phone_code;
-  
-  
+  let code = req.body.code;
+
   // 判断验证码是不是正确
   if(code !== tempUser[phone]){
     
