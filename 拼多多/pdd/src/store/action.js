@@ -22,6 +22,7 @@ import {
   is_login,
   edit_login,  
 } from './../api/index';
+import { log } from 'util';
 
 
 export default {
@@ -61,11 +62,13 @@ export default {
   },
 
   // 请求推荐列表
-  async recommendList({commit}){
-    const result = await requireRecommend();
+  async recommendList({commit}, obj){
+    let callback = obj.callback;
+    const result = await requireRecommend(obj.params, obj.callback);
     if(result.status === 200){
       let data = result.data;
       commit(RECLIST, {data});
+      callback.scb && callback.scb(data);
     }
   },
 

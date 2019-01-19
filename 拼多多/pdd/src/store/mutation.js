@@ -34,7 +34,7 @@ export default {
   },
 
   [RECLIST](state, {data}){
-    state.ReqList = data.data;
+    state.ReqList = state.ReqList.concat(data.data);
   },
   
   [REWRITE](state, info){

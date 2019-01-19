@@ -1,7 +1,7 @@
 <template>
-  <div class="recommend" v-if="User._id">
-    <!--mescroll滚动区域的基本结构-->
-			      <!--内容...-->
+  <scroll class="scroller" :upCallback="upCallback" ref="mescroll" warpId="index_scroll"
+          id="index_scroll"  v-if="User._id">
+  <div class="recommend">
       <div class="rec-item" v-for="(good, index) in ReqList" :key=index>
         <img :src="good.hd_thumb_url" alt="">
         <p>{{good.goods_name}}</p>
@@ -16,7 +16,10 @@
           <button class="item-b-right">发现 ></button>
         </div>
       </div>
+      
   </div>
+  </scroll>
+
   <login_select v-else/>
 </template>
 
@@ -24,19 +27,46 @@
 import {mapState} from 'vuex';
 import login_select from './../Login/Login_select';
 import axios from 'axios'
+  import Scroll from './../../components/mescroll/Scroll';
 
 export default {
   name: 'Recommend',
   data() {
     return {
+     
     }
   },
   components: {
     login_select,
+    Scroll
   },
-  mounted(){
-    this.$store.dispatch('recommendList');
-   
+  mounted() {
+    this.dataList = this.ReqList;
+  },
+  methods: {
+    upCallback (page) {
+      const SIZE = 20;
+      this.$store.dispatch('recommendList', {
+        params: {
+          'app_name': 'rectab_sim_gyl',
+          'offset': (page.num-1) * page.size,
+          'count': page.size,
+        },
+        callback: {
+          'scb': (result) => {
+            console.log('成功');
+            this.$refs.mescroll.endSuccess(result.length);
+          },
+          'ecb': (err) => {
+            console.log('失败');
+            this.$refs.mescroll.endErr();
+          }
+        }
+      });
+
+     
+    }
+  
   },
   computed: {
     ...mapState([

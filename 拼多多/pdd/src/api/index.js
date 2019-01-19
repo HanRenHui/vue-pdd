@@ -34,14 +34,7 @@ const edit_login = ()=> ajax(BASE_URL + '/api/edit_login');
 const PDD_URL = '/api'
 
 // 请求推荐列表
-const requireRecommend = ()=> ajax(PDD_URL + '/proxy/api/api/barrow/query', {
-  app_name: 'rectab_sim_gyl',
-  offset: 0,
-  count: 20,
-  list_id: 'goods_CRIQIT',
-  dp_list_id: 'single_wg6QB2',
-  pdduid: 8112559702450
-});
+const requireRecommend = (params, callback)=> ajax(PDD_URL + '/proxy/api/api/barrow/query', params, callback);
 
 
 export {
