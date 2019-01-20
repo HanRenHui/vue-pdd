@@ -10,6 +10,8 @@ const CHANGECOUNT = 'changeCount';
 const DELETE = 'delete';
 const CHECKONE = 'checkone';
 const ALLSELECT = 'allselect';
+const GETSEARCHLIST = 'getsearchlist'
+
 export {
   TAB_DATA,
   CAROU_IMG,
@@ -23,5 +25,5 @@ export {
   DELETE,
   CHECKONE,
   ALLSELECT,
-  
+  GETSEARCHLIST
 };

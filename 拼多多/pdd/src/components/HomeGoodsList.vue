@@ -1,7 +1,7 @@
 <template>
   <div class="homeGoodsList">
     <div class="goodList" v-for="(good, index) in HomeGoodsList" :key=index>
-      <img :src="good.image_url" class="item-top" alt="">
+      <img v-lazy="good.image_url" class="item-top" alt="">
       <p>{{good.goods_name}}</p>
       <div class="item-bottom">
         <div class="item-bottom-left">
@@ -11,7 +11,7 @@
         <div class="item-bottom-right">
           <div class="group">
             <a href="javascript:;" v-for="(one, index) in good.bubble" :key = index>
-              <img :src="one.avatar" class="bubble_avatar" alt="">
+              <img v-lazy="one.avatar" class="bubble_avatar" alt="">
             </a>
           </div>
           <button>去拼单</button>

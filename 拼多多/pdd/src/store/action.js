@@ -10,7 +10,8 @@ import {
   CHANGECOUNT,
   DELETE,
   CHECKONE,
-  ALLSELECT
+  ALLSELECT,
+  GETSEARCHLIST
 } from './mutation-type';
 
 import {
@@ -21,6 +22,7 @@ import {
   requireRecommend,
   is_login,
   edit_login,  
+  requireSearchList
 } from './../api/index';
 import { log } from 'util';
 
@@ -58,6 +60,14 @@ export default {
     if(goods.status === 200){
       let data = goods.data;
       commit(GOODLSIT, {data});
+    }
+  },
+  // 请求搜索列表
+  async searchList({commit}){
+    const result = await requireSearchList();
+    if(goods.status === 200){
+      let data = result.data;
+      commit(GETSEARCHLIST, {data});
     }
   },
 
@@ -110,5 +120,6 @@ export default {
   selectAll({commit}, allCheckFlag){
     commit(ALLSELECT, allCheckFlag);
   }
+  ,
 
 }

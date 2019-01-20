@@ -1,23 +1,24 @@
 <template>
   <scroll class="scroller" :upCallback="upCallback" ref="mescroll" warpId="index_scroll"
           id="index_scroll"  v-if="User._id">
-  <div class="recommend">
-      <div class="rec-item" v-for="(good, index) in ReqList" :key=index>
-        <img :src="good.hd_thumb_url" alt="">
-        <p>{{good.goods_name}}</p>
-        <span class="tag" v-for="(tag, item) in good.tag_list" :key= item>
-          {{tag.text}}
-        </span>
-        <div class="item-bottom">
-          <div class="item-b-left">
-            <span class="price">￥{{good.price/100}}</span>
-            <span class="sales_tip">{{good.sales_tip}}</span> 
+    <div class="recommend">
+      <!-- <keep-alive> -->
+        <div class="rec-item" v-for="(good, index) in ReqList" :key=index>
+          <img v-lazy="good.hd_thumb_url" alt="">
+          <p>{{good.goods_name}}</p>
+          <span class="tag" v-for="(tag, item) in good.tag_list" :key= item>
+            {{tag.text}}
+          </span>
+          <div class="item-bottom">
+            <div class="item-b-left">
+              <span class="price">￥{{good.price/100}}</span>
+              <span class="sales_tip">{{good.sales_tip}}</span> 
+            </div>
+            <button class="item-b-right">发现 ></button>
           </div>
-          <button class="item-b-right">发现 ></button>
         </div>
-      </div>
-      
-  </div>
+      <!-- </keep-alive> -->
+    </div>  
   </scroll>
 
   <login_select v-else/>
@@ -45,12 +46,13 @@ export default {
   },
   methods: {
     upCallback (page) {
+      
       const SIZE = 20;
       this.$store.dispatch('recommendList', {
         params: {
           'app_name': 'rectab_sim_gyl',
-          'offset': (page.num-1) * page.size,
-          'count': page.size,
+          'offset': (page.num-1) * SIZE,
+          'count': SIZE,
         },
         callback: {
           'scb': (result) => {

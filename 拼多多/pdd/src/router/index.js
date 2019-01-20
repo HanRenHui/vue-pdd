@@ -11,10 +11,16 @@ import Me from './../vues/Me/Me'
 import Login from './../vues/Login/Login.vue'
 
 
-// 主页的二级路由
-import Hot from './../vues/Home/children/Hot/Hot.vue'
-import Clothes from './../vues/Home/children/Clothes/Clothes.vue'
-import InnerClothes from './../vues/Home/children/InnerClothes/InnerClothes.vue'
+// 主页的二级路由 
+
+const Hot = () => import('./../vues/Home/children/Hot/Hot.vue')
+
+const Clothes = () => import('./../vues/Home/children/Clothes/Clothes.vue')
+
+const InnerClothes = () => import('./../vues/Home/children/InnerClothes/InnerClothes.vue')
+
+
+
 
 Vue.use(VueRouter);
 
@@ -26,7 +32,7 @@ export default new VueRouter({
       children: [
         {path: 'hot', component: Hot, meta: {showTab: true} },
         {path: 'clothes', component: Clothes, meta: {showTab: true}},
-        {path: 'InnerClothes', component: InnerClothes},
+        {path: 'InnerClothes', component: InnerClothes()},
         {path: '/home', redirect: '/home/hot'}
       ],
     },

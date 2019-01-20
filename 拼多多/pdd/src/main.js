@@ -12,6 +12,14 @@ import LyTab from 'ly-tab'
 // 引入字体图标
 import '@/common/style.css'
 
+// 引入懒加载
+import vueLazyLoad from 'vue-lazyload'
+
+import loading from './common/images/lazy.png'
+Vue.use(vueLazyLoad,{
+  loading
+});
+
 
 Vue.use(LyTab);
 /* eslint-disable no-new */

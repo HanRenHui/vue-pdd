@@ -15,6 +15,9 @@ const requireHotNav = ()=> ajax(BASE_URL + '/api/hotnav');
 // 请求gooidsList
 const requireGoodsList = ()=> ajax(BASE_URL + '/api/homegoods');
 
+// 请求搜索列表数据
+const requireSearchList = ()=> ajax(BASE_URL + '/api/searchList');
+
 // 请求短信验证码
 const requireTextCode = (params) => ajax(BASE_URL + '/api/phone_code',params);
 
@@ -48,5 +51,6 @@ export {
   phone_login,
   pwd_login,
   is_login,
-  edit_login
+  edit_login,
+  requireSearchList
 };

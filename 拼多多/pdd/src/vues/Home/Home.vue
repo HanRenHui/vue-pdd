@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    handleChange(item,index){
+    handleChange(item, index){
       this.$router.replace(this.secondRouteArr[index]);
     }
   },

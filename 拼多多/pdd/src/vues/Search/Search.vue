@@ -39,6 +39,7 @@
 
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
+
 export default {
   name: 'Search',
 
@@ -67,11 +68,13 @@ export default {
   width 100%
   height 100%
   .header
-    position relative
+    position fixed
+    left 0
+    top 0
+    background #fff
     width 100%
     height 6.4rem
     border-bottom 1px solid #eeeeee
-    margin-botom 6.4rem
     .header-content
       display flex
       justify-content center
@@ -94,7 +97,8 @@ export default {
     width 100%
     height 100%
     display flex
-    margin-bottom 5rem
+    box-sizing border-box
+    padding-top 6.4rem
     .search-main-left 
       width 25%
       height 100%

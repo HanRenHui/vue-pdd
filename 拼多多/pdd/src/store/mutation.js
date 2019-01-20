@@ -10,7 +10,8 @@ import {
   CHANGECOUNT,
   DELETE,
   CHECKONE,
-  ALLSELECT
+  ALLSELECT,
+  GETSEARCHLIST
 } from './mutation-type';
 import { log } from 'util';
 
@@ -76,5 +77,10 @@ export default {
     state.cartGoods.forEach((good, index)=>{
       good.checked = allCheckFlag;
     });
+  },
+  [GETSEARCHLIST](state, {data}){
+    console.log(data);
+    
+    // state.SearchList = data.data
   }
 }

@@ -4,6 +4,8 @@ export default {
   NavDate: {},
   HomeGoodsList: [],
   ReqList: [],
+  // 搜索列表
+  SearchList: [],
   User: {},
   // 人造购物车数据
   cartGoods: [
