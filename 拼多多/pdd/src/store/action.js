@@ -24,7 +24,6 @@ import {
   edit_login,  
   requireSearchList
 } from './../api/index';
-import { log } from 'util';
 
 
 export default {
@@ -65,7 +64,7 @@ export default {
   // 请求搜索列表
   async searchList({commit}){
     const result = await requireSearchList();
-    if(goods.status === 200){
+    if(result.status === 200){
       let data = result.data;
       commit(GETSEARCHLIST, {data});
     }

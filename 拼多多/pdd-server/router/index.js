@@ -26,4 +26,10 @@ router.get('/api/homegoods',(req,res,next)=> {
   res.json(data);
 });
 
+// 返回搜索页数据
+router.get('/api/searchList', (req, res, next)=> {
+  let data = require('./../data/search.json');
+  res.json(data);
+});
+
 export default router;

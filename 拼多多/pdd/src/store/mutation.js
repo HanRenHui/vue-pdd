@@ -79,8 +79,6 @@ export default {
     });
   },
   [GETSEARCHLIST](state, {data}){
-    console.log(data);
-    
-    // state.SearchList = data.data
+    state.SearchList = data.data;
   }
 }

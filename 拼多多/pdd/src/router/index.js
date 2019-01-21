@@ -11,7 +11,7 @@ import Me from './../vues/Me/Me'
 import Login from './../vues/Login/Login.vue'
 
 
-// 主页的二级路由 
+// 主页的二级路由 懒加载的方式
 
 const Hot = () => import('./../vues/Home/children/Hot/Hot.vue')
 

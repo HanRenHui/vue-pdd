@@ -31,7 +31,20 @@
         </ul>
       </section>
       <section class="search-main-right">
-
+        <div class="content" ref="content">
+          <div v-for="(list, index) in SearchList" :key = index class="list">
+            <div class="search-main-header">
+              <span>{{list.name}}</span>
+              <span>查看更多</span>
+            </div>
+            <ul>
+              <li v-for="(good, key) in list.items" :key=key>
+                <img v-lazy="good.icon" alt="">
+                <span>{{good.title}}</span>
+              </li>
+            </ul>
+          </div>
+        </div> 
       </section>
     </section>
   </div>
@@ -39,23 +52,48 @@
 
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
+import BScroll from 'better-scroll'
 
 export default {
   name: 'Search',
-
   data() {
     return {
       
     }
   },
+  mounted(){
+    this.$store.dispatch('searchList');
+    let left = new BScroll('.search-main-left');
+    this.right = new BScroll('.search-main-right');
+    let content = this.$refs.content;
+    let lists = content.children;
+    this.right.on('scroll', ()=>{
+      console.log(1);
+      
+    });
+    // content.addEventListener('scroll',function(){
+    //   console.log(1);
+      
+      // for(let i=0; i<lists.length; i++){
+      //     let top = document.documentElement.scrollTop;
+      //     console.log(top);
+          
+      //     let listTop = lists[i].offsetTop;
+      //     if(top >= listTop){
+      //       console.log(i);
+      //     }
+      //   }
+    // });
+  
+    
+  },
   components: {
 
   },
   computed: {
-    title(){
-      // return this.SearchTitle[parseInt(Math.random()* this.SearchTilte.length)];
-      return this.SearchTitle;
-    }
+    ...mapState([
+      'SearchList'
+    ])
   },
   watch: {
     
@@ -126,5 +164,31 @@ export default {
     .search-main-right
       width 75%
       height 100%
-      background yellow
+      padding 1.3rem
+      box-sizing border-box
+      overflow hidden
+      .list 
+        .search-main-header 
+          display flex
+          justify-content space-between
+          align-items center
+          height 4.4rem
+          span  
+            font-size 1.4rem
+            color #999
+        ul 
+          display flex
+          flex-wrap wrap
+          li
+            display flex
+            flex-direction column
+            justify-content center
+            align-items center
+            width 33.3%
+            font-family: "Microsoft Yahei";
+            color #666
+            font-size 1.3rem
+            margin-bottom 1.3rem
+            img 
+              width 90%
 </style>
