@@ -18,6 +18,7 @@ const requireGoodsList = ()=> ajax(BASE_URL + '/api/homegoods');
 // 请求搜索列表数据
 const requireSearchList = ()=> ajax(BASE_URL + '/api/searchList');
 
+
 // 请求短信验证码
 const requireTextCode = (params) => ajax(BASE_URL + '/api/phone_code',params);
 
@@ -39,6 +40,13 @@ const PDD_URL = '/api'
 // 请求推荐列表
 const requireRecommend = (params, callback)=> ajax(PDD_URL + '/proxy/api/api/barrow/query', params, callback);
 
+// 请求搜索页热门搜索列表
+
+const requireSearchHot = ()=> ajax(PDD_URL + '/proxy/api/search_hotquery', {
+  pdduid: 1846284283948,
+  is_back: 1
+});
+
 
 export {
   requireTabData,
@@ -52,5 +60,6 @@ export {
   pwd_login,
   is_login,
   edit_login,
-  requireSearchList
+  requireSearchList,
+  requireSearchHot
 };
