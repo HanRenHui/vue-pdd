@@ -1,38 +1,27 @@
 <template>
-  <div class="search" v-if="!showSearchPanel">
+<div class="outside">
+  <div class="search">
     <div class="header">
-      <div class="header-content">
-        <img src="./images/search.png" alt="">
+      <div class="header-content" @click="showPanel()">
+        <img src="./images/搜索.png" alt="">
         <span>搜索一下</span>
       </div>
     </div>
     <section class="search-main">
       <section class="search-main-left">
-        <ul>
-          <li class="current"><a href="javscript:;">女装</a></li>
-          <li><a href="javscript:;">鞋包</a></li>
-          <li><a href="javscript:;">男装</a></li>
-          <li><a href="javscript:;">内衣</a></li>
-          <li><a href="javscript:;">食品</a></li>
-          <li><a href="javscript:;">百货</a></li>
-          <li><a href="javscript:;">美妆</a></li>
-          <li><a href="javscript:;">手机</a></li>
-          <li><a href="javscript:;">电器</a></li>
-          <li><a href="javscript:;">家纺</a></li>
-          <li><a href="javscript:;">家具</a></li>
-          <li><a href="javscript:;">电脑</a></li>
-          <li><a href="javscript:;">充值</a></li>
-          <li><a href="javscript:;">水果</a></li>
-          <li><a href="javscript:;">运动</a></li>
-          <li><a href="javscript:;">家装</a></li>
-          <li><a href="javscript:;">汽车</a></li>
-          <li><a href="javscript:;">海淘</a></li>
-          <li><a href="javscript:;">健康</a></li>
+        <ul ref="leftUl">
+          <li 
+            v-for="(list, index) in SearchList" 
+            :class="{current: currentIndex==index}" 
+            :key = index 
+          >
+            <span href="">{{list.name}}</span>
+          </li>
         </ul>
       </section>
       <section class="search-main-right">
         <div class="content" ref="content">
-          <div v-for="(list, index) in SearchList" :key = index class="list">
+          <div v-for="(list, index) in SearchList" :key = index class="list" ref='lists'>
             <div class="search-main-header">
               <span>{{list.name}}</span>
               <span>查看更多</span>
@@ -48,18 +37,17 @@
       </section>
     </section>
   </div>
-  <div class="searchPanel" v-else>
+  <div class="searchPanel" v-if="showSearchPanel">
     <div class="searchPanel-header">
       <div class="header-left">
         <span></span>
         <input type="text">
       </div>
       <div class="header-right">
-        <button>取消</button>
+        <button @click="cancel()">取消</button>
       </div>
     </div>
     <div class="searchPanel-recently">
-      
     </div>
     <div class="searchPanel-hot">
       <div class="hot-header">
@@ -72,6 +60,8 @@
       </ul>
     </div>
   </div>
+</div>
+ 
 </template>
 
 <script type="text/ecmascript-6">
@@ -82,31 +72,64 @@ export default {
   name: 'Search',
   data() {
     return {
-      showSearchPanel: true,
-      HotSearch: []
+      showSearchPanel: false,
+      HotSearch: [],
+      scrollY: 0,
+      heightArr: [],
+      currentIndex: 0
     }
   },
   mounted(){
     // 请求热门搜索的数据
-    this.hotSearch()
+    this.hotSearch();
     this.$store.dispatch('searchList');
-    let left = new BScroll('.search-main-left');
-    this.right = new BScroll('.search-main-right');
-    let content = this.$refs.content;
-    let lists = content.children;
-
-    
   },
+
   methods: {
     async hotSearch(){
       const result = await requireSearchHot();
       if(result.status === 200){
         let data = result.data; 
         this.HotSearch = data.items;
-        console.log(this.HotSearch);
-        
       }
+    },
+
+    cancel(){
+      this.showSearchPanel = false;
+    },
+
+    showPanel(){
+      this.showSearchPanel = true;
+    },
+    
+    // better-scroll 初始化
+    _initBetterScroll(){
+      this.left = new BScroll('.search-main-left', {probeType: 3});
+      this.right = new BScroll('.search-main-right', {probeType: 3});
+      // 监听右侧滚动
+      this.right.on('scroll', pos => {
+        this.scrollY = Math.abs(pos.y);
+      });
+    },
+    // 取得右侧所有盒子的额高度
+    getAllListHeight(){
+      this.$nextTick(()=>{
+        let rightLis = this.$refs.lists;
+        
+        let height = 0;
+        this.heightArr.push(height);
+        for(let i=0; i<rightLis.length; i++){
+          height += rightLis[i].offsetHeight;
+          this.heightArr.push(height);
+        }
+      });
+    },
+    // 监听左侧列表的点击
+    clickLeftLi(){
+      console.log(0);
+      // this.right.scrollTo(0, this.heightArr[index], 300);
     }
+
   },
   computed: {
     ...mapState([
@@ -114,12 +137,30 @@ export default {
     ])
   },
   watch: {
-    
+    SearchList(){ 
+      this.$nextTick(()=> {
+        // 初始化bescroll
+        this._initBetterScroll();
+        // 获取所有高度
+        this.getAllListHeight();
+      });
+    },
+    scrollY(){
+      let {heightArr} = this;
+      let index = heightArr.findIndex((one, index)=>{
+        return this.scrollY >= one && this.scrollY < heightArr[index+1];
+      });
+      this.currentIndex = index;
+    }
+
   }
 }
 </script>
 
 <style scoped lang="stylus">
+.outside 
+  width 100%
+  height 100%
 .clearfix::after 
  content ''
  display block 
@@ -152,13 +193,14 @@ export default {
         margin-right 1rem
       span 
         font-size: 1.6rem;
-        color: #9c9c9c;
+        color: #58595b;
   .search-main 
     width 100%
     height 100%
     display flex
     box-sizing border-box
     padding-top 6.4rem
+    overflow hidden
     .search-main-left 
       width 25%
       height 100%
@@ -172,17 +214,18 @@ export default {
           line-height 5.2rem
           width 100%
           background: #f4f4f4
-          a
+          span
             color #58595B
             font-size 1.6rem
-            text-decoration none
             font-family '微软雅黑'
+            box-sizing border-box 
+            padding 0.5rem 3rem
           &.current 
             background #fff
-            a 
+            span 
               color #E02E24
               border-left 3px solid #e02e24
-              padding 0 3rem
+              padding 0.5rem 3rem
     .search-main-right
       width 75%
       height 100%
@@ -215,8 +258,13 @@ export default {
               width 90%
 
 .searchPanel 
+  position absolute;
+  left 0
+  top 0
   width 100%
   height 100%
+  background #fff
+  overflow hidden
   .searchPanel-header 
   
     display flex

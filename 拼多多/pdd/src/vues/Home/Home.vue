@@ -48,6 +48,7 @@ export default {
         activeColor: '#fff'
         // 可在这里指定labelKey为你数据里文字对应的字段
       },
+      
     }
   },
   methods: {
