@@ -1,5 +1,6 @@
 <template>
 <div class="outside">
+  <!-- 主面板 -->
   <div class="search">
     <div class="header">
       <div class="header-content" @click="showPanel()">
@@ -13,9 +14,9 @@
           <li 
             v-for="(list, index) in SearchList" 
             :class="{current: currentIndex==index}" 
-            :key = index 
+            :key=index 
           >
-            <span href="">{{list.name}}</span>
+            {{list.name}}
           </li>
         </ul>
       </section>
@@ -37,6 +38,7 @@
       </section>
     </section>
   </div>
+  <!-- 搜索面板 -->
   <div class="searchPanel" v-if="showSearchPanel">
     <div class="searchPanel-header">
       <div class="header-left">
@@ -83,6 +85,7 @@ export default {
     // 请求热门搜索的数据
     this.hotSearch();
     this.$store.dispatch('searchList');
+    
   },
 
   methods: {
@@ -101,14 +104,15 @@ export default {
     showPanel(){
       this.showSearchPanel = true;
     },
-    
+
     // better-scroll 初始化
     _initBetterScroll(){
-      this.left = new BScroll('.search-main-left', {probeType: 3});
-      this.right = new BScroll('.search-main-right', {probeType: 3});
+      this.left = new BScroll('.search-main-left', {probeType: 3, tap: true});
+      this.right = new BScroll('.search-main-right', {probeType: 3, tap: true});
       // 监听右侧滚动
       this.right.on('scroll', pos => {
         this.scrollY = Math.abs(pos.y);
+        
       });
     },
     // 取得右侧所有盒子的额高度
@@ -126,9 +130,21 @@ export default {
     },
     // 监听左侧列表的点击
     clickLeftLi(){
-      console.log(0);
-      // this.right.scrollTo(0, this.heightArr[index], 300);
-    }
+      let leftUl = this.$refs.leftUl;
+      let index = 0;
+      leftUl.addEventListener('tap', e=>{
+          index = [].findIndex.call(leftUl.children, element =>{
+            return element == e.target;
+          });
+          this.right.scrollTo(0, -this.heightArr[index], 300);
+      }, true);
+    },
+    // 左边联动
+    _leftScroll(index){
+      let el = this.$refs.leftUl.children[index];
+      this.left.scrollToElement(el, 0, 0, -100);
+      
+    } 
 
   },
   computed: {
@@ -143,13 +159,18 @@ export default {
         this._initBetterScroll();
         // 获取所有高度
         this.getAllListHeight();
+        // 监听左侧按钮点击
+        this.clickLeftLi();
       });
     },
     scrollY(){
       let {heightArr} = this;
       let index = heightArr.findIndex((one, index)=>{
+        this._leftScroll(index);
         return this.scrollY >= one && this.scrollY < heightArr[index+1];
       });
+      // 左侧联动
+       
       this.currentIndex = index;
     }
 
@@ -214,18 +235,17 @@ export default {
           line-height 5.2rem
           width 100%
           background: #f4f4f4
-          span
-            color #58595B
-            font-size 1.6rem
-            font-family '微软雅黑'
-            box-sizing border-box 
-            padding 0.5rem 3rem
+          color #58595B
+          font-size 1.6rem
+          font-family '微软雅黑'
+          box-sizing border-box 
+          padding 0.5rem 3rem
           &.current 
             background #fff
-            span 
-              color #E02E24
-              border-left 3px solid #e02e24
-              padding 0.5rem 3rem
+            color #E02E24
+            border-left 3px solid #e02e24
+            padding 0.5rem 3rem
+            
     .search-main-right
       width 75%
       height 100%

@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" class="hotNav">
     <ul>
       <li>
         <div v-for='(item, index) in NavDate.item1' :key = index>
@@ -13,7 +13,6 @@
           <span>{{item.icontitle}}</span>
         </div>
       </li>
-
     </ul>
   </div>
 </template>
@@ -24,6 +23,11 @@ import IScroll from 'iscroll';
 
 export default {
   name: 'HotNav',
+  data(){
+    return {
+
+    }
+  },
   mounted() {
     new IScroll('#wrapper',{
       scrollX: true
@@ -37,6 +41,14 @@ export default {
       "NavDate"
     ])
   },
+  watch: {
+    NavDate(){
+      this.nextTick(()=>{
+        console.log(0);
+        
+      });
+    }
+  }
 }
 </script>
 
