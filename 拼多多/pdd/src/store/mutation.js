@@ -13,7 +13,6 @@ import {
   ALLSELECT,
   GETSEARCHLIST
 } from './mutation-type';
-import { log } from 'util';
 
 
 export default {
@@ -26,8 +25,9 @@ export default {
   },
 
   [HotNav](state, {data}){
-    state.NavDate.item1 = data.data.item1;
-    state.NavDate.item2 = data.data.item2;
+    // state.NavDate.item1 = data.data.item1;
+    // state.NavDate.item2 = data.data.item2;
+    state.NavDate = data.data;
   },
 
   [GOODLSIT](state, {data}){

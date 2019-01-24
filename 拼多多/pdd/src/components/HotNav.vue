@@ -28,7 +28,11 @@ export default {
 
     }
   },
+  created(){
+
+  },
   mounted() {
+    this.$store.dispatch('reqHotNav');
     new IScroll('#wrapper',{
       scrollX: true
     });
@@ -42,12 +46,7 @@ export default {
     ])
   },
   watch: {
-    NavDate(){
-      this.nextTick(()=>{
-        console.log(0);
-        
-      });
-    }
+  
   }
 }
 </script>

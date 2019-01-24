@@ -143,7 +143,6 @@ export default {
     _leftScroll(index){
       let el = this.$refs.leftUl.children[index];
       this.left.scrollToElement(el, 0, 0, -100);
-      
     } 
 
   },
