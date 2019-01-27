@@ -39,14 +39,13 @@ export default {
   },
   
   [REWRITE](state, info){
-    state.User._id = info._id;
-    state.User.name = info.name;
-    state.User.phone = info.phone;
+    state.User = info;
   },
+
   [AUTOLOGIN](state, {data}){
-    state.User._id = data._id;
-    state.User.name = data.name;
-    state.User.phone = data.phone;
+    
+    state.User = data;
+    
   },
 
   [EDIT](state){
@@ -70,14 +69,17 @@ export default {
   [DELETE](state, index){
     state.cartGoods.splice(index, 1);
   },
+
   [CHECKONE](state, index){
     state.cartGoods[index].checked = !state.cartGoods[index].checked ;
   },
+
   [ALLSELECT](state, allCheckFlag){
     state.cartGoods.forEach((good, index)=>{
       good.checked = allCheckFlag;
     });
   },
+
   [GETSEARCHLIST](state, {data}){
     state.SearchList = data.data;
   }

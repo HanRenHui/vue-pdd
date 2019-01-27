@@ -106,7 +106,7 @@
           <i class="icon-18"></i>
           <span>邀请好友</span>
         </li>
-        <li>
+        <li @click="$router.replace('/set')">
           <i class="icon-9"></i>
           <span>设置</span>
         </li>
@@ -114,9 +114,6 @@
     </div>
 
     <!-- 精选推荐 -->
-    <div class="edit" @click="edit()">
-      退出登录
-    </div>
     <div class="center-recommend">
       <div class="recommend-title">
         
@@ -154,17 +151,7 @@ export default {
     }
   },
   methods: {
-    edit(){
-      MessageBox.confirm('您确定退出么?').then(action => {
-         this.$store.dispatch('edit_login');
-        Toast({
-          message: '退出成功',
-          position: 'top',
-          duration: 1000,
-        });
-      });
-     
-    }
+    
   }
 }
 </script>

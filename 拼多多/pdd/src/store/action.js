@@ -83,6 +83,7 @@ export default {
 
   // 更新前端用户信息
   rewriteUserInfo({commit}, info){
+    
     commit(REWRITE, info);
   },
 

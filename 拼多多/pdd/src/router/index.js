@@ -9,7 +9,7 @@ import Search from './../vues/Search/Search'
 import Cart from './../vues/Cart/Cart'
 import Me from './../vues/Me/Me'
 import Login from './../vues/Login/Login.vue'
-
+import LoginCenter from './../vues/SetCenter/setCenter.vue'
 
 // 主页的二级路由 懒加载的方式
 
@@ -41,6 +41,7 @@ export default new VueRouter({
     {path: '/cart',component: Cart, meta: {showTab: true}},
     {path: '/login', component: Login},
     {path: '/me', component: Me, meta: {showTab: true}},
-    {path: '/', redirect: '/home'}
+    {path: '/', redirect: '/home'},
+    {path: '/set', component: LoginCenter}
   ]
 });
