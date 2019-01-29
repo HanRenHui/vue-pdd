@@ -126,6 +126,8 @@ export default {
           height += rightLis[i].offsetHeight;
           this.heightArr.push(height);
         }
+        console.log(this.heightArr);
+        
       });
     },
     // 监听左侧列表的点击
