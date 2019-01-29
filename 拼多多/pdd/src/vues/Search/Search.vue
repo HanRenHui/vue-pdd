@@ -118,15 +118,12 @@ export default {
     // 取得右侧所有盒子的额高度
     getAllListHeight(){
       let rightLis = this.$refs.lists;
-      
       let height = 0;
       this.heightArr.push(height);
       for(let i=0; i<rightLis.length; i++){
         height += rightLis[i].offsetHeight;
         this.heightArr.push(height);
       }
-        console.log(this.heightArr);
-        
     },
     // 监听左侧列表的点击
     clickLeftLi(){
