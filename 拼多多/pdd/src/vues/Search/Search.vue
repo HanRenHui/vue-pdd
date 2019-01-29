@@ -117,18 +117,16 @@ export default {
     },
     // 取得右侧所有盒子的额高度
     getAllListHeight(){
-      this.$nextTick(()=>{
-        let rightLis = this.$refs.lists;
-        
-        let height = 0;
+      let rightLis = this.$refs.lists;
+      
+      let height = 0;
+      this.heightArr.push(height);
+      for(let i=0; i<rightLis.length; i++){
+        height += rightLis[i].offsetHeight;
         this.heightArr.push(height);
-        for(let i=0; i<rightLis.length; i++){
-          height += rightLis[i].offsetHeight;
-          this.heightArr.push(height);
-        }
+      }
         console.log(this.heightArr);
         
-      });
     },
     // 监听左侧列表的点击
     clickLeftLi(){
@@ -158,8 +156,11 @@ export default {
       this.$nextTick(()=> {
         // 初始化bescroll
         this._initBetterScroll();
-        // 获取所有高度
-        this.getAllListHeight();
+        setTimeout(()=>{
+          // 获取所有高度
+          this.getAllListHeight();
+        },500);
+
         // 监听左侧按钮点击
         this.clickLeftLi();
       });
