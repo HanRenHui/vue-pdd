@@ -1,6 +1,7 @@
 import ajax from './ajax.js';
 
-const BASE_URL = '/local_api';
+// const BASE_URL = '/local_api';
+const BASE_URL = 'http://localhost:1688';
 
 
 // 请求底部tab数据

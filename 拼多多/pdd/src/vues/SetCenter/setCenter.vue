@@ -106,9 +106,6 @@ export default {
     ...mapState([
       'User'
     ])
-  },
-  watch: {
-
   }
 }
 </script>

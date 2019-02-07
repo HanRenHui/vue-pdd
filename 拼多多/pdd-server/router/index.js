@@ -16,6 +16,8 @@ router.get('/api/carouslImg', (req,res,next)=>{
 
 // 返回hotnav的数据
 router.get('/api/hotnav',(req,res,next)=>{
+  console.log(1);
+  
   let data = require('./../data/hotnav.json');
   res.json(data);
 });

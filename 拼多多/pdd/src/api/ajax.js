@@ -14,10 +14,22 @@ export default function (url, params = {}, type = "GET"){
       // 处理get请求
       params = parseDate(params);
       url =  url + "?" + params;
-      promise = axios.get(url);
+      // promise = axios.get(url);
+      promise = axios({
+        method: 'get',
+        url,
+        withCredentials: true
+      });
     }else {
       // 处理post请求
-      promise = axios.post(url,params);
+      // promise = axios.post(url,params);
+      
+      promise = axios({
+        method: 'post',
+        url: url,
+        data: params,
+        withCredentials: true
+      });
     }
 
     promise.then(response => {

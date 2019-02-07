@@ -16,6 +16,8 @@ router.get('/api/getCaptcha',(req,res,next)=>{
   // 保存验证码到session
   
   req.session.captcha = captcha.text.toLowerCase();
+  // console.log(req.session);
+  
 	// 将验证码返回给客户端
 	res.type('svg');
   res.status(200).send(captcha.data);

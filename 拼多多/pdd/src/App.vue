@@ -35,7 +35,7 @@ export default {
         // 设置页切到个人页
       }else if(from.path === '/set'){
         this.transName = 'fold-right';
-      }else {
+      }else{
         // 其他的页面切换
         this.transName = 'fade';
         this.displayFlag = false;

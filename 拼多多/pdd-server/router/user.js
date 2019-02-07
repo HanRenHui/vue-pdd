@@ -10,9 +10,8 @@ const router = express.Router();
 
 // 账号密码登陆方式
 router.post('/api/login/login_code', (req, res)=>{
-  
   // 验证码不正确
-  if(req.body.captcha !== req.session.captcha){
+  if(req.body.captcha == 'undefined' || req.body.captcha !== req.session.captcha){
     return res.json({
       error_code: 0,
       message: '验证码验证失败'
@@ -22,6 +21,8 @@ router.post('/api/login/login_code', (req, res)=>{
   delete req.session.cpatcha;
   
   user.findOne({name: req.body.name}, (error, doc)=>{
+    console.log(doc.password);
+    
     // 如果已经注册过
     if(doc){
       if(req.body.password !== doc.password){
@@ -126,10 +127,12 @@ router.post('/api/login/phone', (req, res) => {
         name: doc.name || ''
       });
     }else {
-      req.session.userId = doc._id;
+      console.log(-1);
+      
       user.create({
         phone: req.body.phone,
       }, (err,doc)=>{
+      req.session.userId = doc._id;
         res.json({
           status: 200,
           message: '首次手机登录，注册成功',
