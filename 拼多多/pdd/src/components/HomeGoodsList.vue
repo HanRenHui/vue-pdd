@@ -2,7 +2,7 @@
   <div class="homeGoodsList">
     <ul>
       <li v-for="(good, index) in HomeGoodsList" :key = index>
-        <img :src="good.thumb_url" alt="" class="left">
+        <img v-lazy="good.thumb_url" alt="" class="left">
         <section class="content">
           <p class="content-title"><img :src="good.icon.url" alt="不打烊" v-if="good.icon"><span>{{good.goods_name}}</span></p>
           <p class="content-mall" v-if="good.ext">{{good.ext.mall}}</p>
