@@ -13,8 +13,7 @@ const requireCarData = () => ajax(BASE_URL + '/api/carouslImg');
 // 请求hotnav的数据
 const requireHotNav = ()=> ajax(BASE_URL + '/api/hotnav');
 
-// 请求gooidsList
-const requireGoodsList = ()=> ajax(BASE_URL + '/api/homegoods');
+
 
 // 请求搜索列表数据
 const requireSearchList = ()=> ajax(BASE_URL + '/api/searchList');
@@ -46,6 +45,19 @@ const requireRecommend = (params, callback)=> ajax(PDD_URL + '/proxy/api/api/bar
 const requireSearchHot = ()=> ajax(PDD_URL + '/proxy/api/search_hotquery', {
   pdduid: 1846284283948,
   is_back: 1
+});
+
+// 请求gooidsList
+
+const requireGoodsList = ()=> ajax(PDD_URL + '/proxy/api/api/alexa/v1/goods', {
+  list_update_time: true,
+  platform: 1,
+  assist_allowed: 1,
+  page: 1,
+  size: 40,
+  list_id: 'ie8GyC7r0M',
+  antiContent: '0alAfxnUXy1809dVzdnxkDhdgTKeTtKGu-_aNX_xK4B4eUX0AwhjSjwKAcaHBob6SWXefsOs8j6QscVGyt88-_eyD-mibyLJ6SPPArQB-BuS_umbIcZ3bKQTv4bqs5ouLfAF30hMkNms7aKPEmjDATkYFKzmnw4DyuTkN9W7cxXQ-PYMPTKg8xkY654BlWpy0JSdzRMLeFL4zR19dDS0DDs4l6WPiTNS8WEoncTZyZP-QlPNYqPQCJ6fywXww_5WvaUjgQSQkJH-zeaPSpdHvPfv8B_4mjvg5pQfmNSan9AhFQAIKu6jmHi8ObVNPaiJTbiGOj5HvEBo1uUD4JtvrnMmMaapEkeWGHU5tzdzsX4zdIyqyCuUsMpzGZsDBB3PtDme83dUQ6ZNBKbW5Zomy4Flx98YB3X1oQBiSGFRNmBpXxZ_dCce_bDXrpwPubOa1OBWLWnHvhwUqQD3ByNFmL-Zbhby3LLPvdzs7-eKjOL8OQ88khKhitQ5yE',
+  pdduid: '1846284283948'
 });
 
 

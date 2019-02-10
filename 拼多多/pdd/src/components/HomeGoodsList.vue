@@ -1,23 +1,21 @@
 <template>
   <div class="homeGoodsList">
-    <div class="goodList" v-for="(good, index) in HomeGoodsList" :key=index>
-      <img v-lazy="good.image_url" class="item-top" alt="">
-      <p>{{good.goods_name}}</p>
-      <div class="item-bottom">
-        <div class="item-bottom-left">
-          <span class="price">￥{{good.normal_price / 100}}</span>
-          <span class="sales-tip">{{good.sales_tip}}</span>
-        </div>
-        <div class="item-bottom-right">
-          <div class="group">
-            <a href="javascript:;" v-for="(one, index) in good.bubble" :key = index>
-              <img v-lazy="one.avatar" class="bubble_avatar" alt="">
-            </a>
-          </div>
-          <button>去拼单</button>
-        </div>
-      </div>
-    </div>
+    <ul>
+      <li v-for="(good, index) in HomeGoodsList" :key = index>
+        <img :src="good.thumb_url" alt="" class="left">
+        <section class="content">
+          <p class="content-title"><img :src="good.icon.url" alt="不打烊" v-if="good.icon"><span>{{good.goods_name}}</span></p>
+          <p class="content-mall" v-if="good.ext">{{good.ext.mall}}</p>
+          <p class="content-tag">
+            <span v-for="(tag, key) in good.tag_list" :key = key :style= '{color: tag.text_color}'>{{tag.text}}</span>
+          </p>
+          <section class="bottom">
+            <span class="price">￥{{good.group.price / 10}}</span>
+            <span class="tip">{{good.sales_tip}}</span>
+          </section>
+        </section>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -34,7 +32,8 @@ export default {
     ...mapState([
       'HomeGoodsList'
     ])
-  }
+  },
+  
 }
 </script>
 
@@ -43,43 +42,62 @@ export default {
   width 100%
   padding .5rem
   box-sizing border-box
-  font-family '微软雅黑'
-  margin-bottom 4rem
-  .goodList 
-    padding .5rem
-    box-sizing border-box
-    background-color #fff
-    margin-bottom .5rem
-    border-radius .5rem
-    p
-      font-size 1.5rem
-    .item-top 
-      width 100%
-    .item-bottom 
-      display flex
+  margin-top 1rem 0
+  margin-bottom 5rem
+  ul 
+    width 100%
+    li   
+      display flex 
       justify-content space-around
-      margin-top .5rem
-      .item-bottom-left 
-        .price 
-          color red
-          font-size 2rem
-          font-weight bolder
-          margin-right 1.5rem
-        .sales-tip 
+      background #fff
+      border-radius .8rem
+      margin-bottom .8rem
+      padding: .8rem
+      box-sizing border-box
+      .left 
+        width 17.2rem
+        height 17.2rem
+        border-radius .8rem
+      .content 
+        position relative
+        width 20rem
+        .content-title 
           font-size 1.4rem
-      .item-bottom-right
-        display flex
-        .group 
-          margin-right 1.5rem
+          font-family '微软雅黑'
           img 
-            width 2.5rem
-            border-radius 50%
-        button 
+            width 4rem
+            height 1.6rem
+            vertical-align middle
+            margin-right .5rem
+          span  
+            vertical-align middle
+        .content-mall 
+          color #9c9c9c
+          font-size 1.3rem
+          margin-top 1rem
+        .content-tag 
+          position absolute
+          bottom 4rem 
+          left 0
+          font-size 1.2rem 
+          font-family '微软雅黑'
+          span  
+            background-color rgba(255,87,6, 0.08)
+            float left 
+            margin-right 1.5rem
+      .bottom   
+        position absolute 
+        left 0
+        bottom 0
+        .tip 
+          font-size 1.4rem
+          font-family '微软雅黑'
+          color #9c9c9c
+        .price 
+          color #e02e24
+          font-size 1.8rem
+          font-family '微软雅黑'
           font-weight bolder
-          font-size 1.5rem
-          color #fff
-          border-radius .8rem
-          background #e02e24
-          border none
-          width 7rem
+        
+
 </style>

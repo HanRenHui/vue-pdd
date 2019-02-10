@@ -58,6 +58,7 @@ export default {
     const goods = await requireGoodsList();
     if(goods.status === 200){
       let data = goods.data;
+      
       commit(GOODLSIT, {data});
     }
   },
