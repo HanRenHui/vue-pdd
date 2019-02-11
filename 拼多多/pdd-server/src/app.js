@@ -4,6 +4,7 @@ import path from 'path'
 import indexRouter from './../router/index'
 import captchaRouter from './../router/captcha'
 import userRouter from './../router/user'
+import proxy from 'http-proxy-middleware';
 
 import bodyParser from 'body-parser'
 
@@ -49,6 +50,7 @@ app.use(captchaRouter);
 
 // 登陆注册等功能
 app.use(userRouter);
+
 
 app.listen(1688,()=>{
   console.log('服务器运行成功');

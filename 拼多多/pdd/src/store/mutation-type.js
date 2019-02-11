@@ -10,7 +10,8 @@ const CHANGECOUNT = 'changeCount';
 const DELETE = 'delete';
 const CHECKONE = 'checkone';
 const ALLSELECT = 'allselect';
-const GETSEARCHLIST = 'getsearchlist'
+const GETSEARCHLIST = 'getsearchlist';
+const GETDETAIL = 'getdetail';
 
 export {
   TAB_DATA,
@@ -25,5 +26,6 @@ export {
   DELETE,
   CHECKONE,
   ALLSELECT,
-  GETSEARCHLIST
+  GETSEARCHLIST,
+  GETDETAIL
 };

@@ -11,7 +11,8 @@ import {
   DELETE,
   CHECKONE,
   ALLSELECT,
-  GETSEARCHLIST
+  GETSEARCHLIST,
+  GETDETAIL
 } from './mutation-type';
 
 
@@ -82,5 +83,11 @@ export default {
 
   [GETSEARCHLIST](state, {data}){
     state.SearchList = data.data;
+  },
+
+  [GETDETAIL](state, data){
+    console.log(data);
+    
   }
+
 }

@@ -61,6 +61,9 @@ const requireGoodsList = ()=> ajax(PDD_URL + '/proxy/api/api/alexa/v1/goods', {
 });
 
 
+// 请求详情页
+const requireDetil = (params) => ajax(PDD_URL + '/api/tesla/query', params);
+
 export {
   requireTabData,
   requireCarData,
@@ -74,5 +77,6 @@ export {
   is_login,
   edit_login,
   requireSearchList,
-  requireSearchHot
+  requireSearchHot,
+  requireDetil
 };

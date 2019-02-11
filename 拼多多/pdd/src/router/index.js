@@ -32,7 +32,7 @@ export default new VueRouter({
       children: [
         {path: 'hot', component: Hot, meta: {showTab: true} },
         {path: 'clothes', component: Clothes, meta: {showTab: true}},
-        {path: 'InnerClothes', component: InnerClothes()},
+        {path: 'InnerClothes', component: InnerClothes},
         {path: '/home', redirect: '/home/hot'}
       ],
     },

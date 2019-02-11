@@ -17,6 +17,9 @@ module.exports = {
         pathRewrite: {
           '^/api': '' //路径重写
         }
+      },
+      '/apiv2': {
+        target: ''
       }
     },
 

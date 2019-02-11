@@ -1,7 +1,7 @@
 <template>
   <div class="homeGoodsList">
     <ul>
-      <li v-for="(good, index) in HomeGoodsList" :key = index>
+      <li v-for="(good, index) in HomeGoodsList" :key = index @click="getDetil(index)">
         <img v-lazy="good.thumb_url" alt="" class="left">
         <section class="content">
           <p class="content-title"><img :src="good.icon.url" alt="不打烊" v-if="good.icon"><span>{{good.goods_name}}</span></p>
@@ -21,11 +21,32 @@
 
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
+import axios from 'axios';
+
 export default {
   name: 'homeGoodsList',
   data() {
     return {
 
+    }
+  },
+  methods: {
+    getDetil(index){
+      let goods_id = this.HomeGoodsList[index].goods_id;
+      // this.$store.dispatch('getDetailContent', {goods_id});
+      this.$store.dispatch('getDetailContent', {
+        list_id: 'goods_detail_mall_59g9nh',
+        app_name: 'goods_detail_mall',
+        goods_id ,
+        pdduid: 1846284283948
+      });
+      // axios({
+      //   method: 'get',
+      //   url: `/api?list_id=goods_detail_mall_59g9nh&app_name=goods_detail_mall&goods_id=${goods_id}&pdduid=1846284283948`,
+      // }).then(data=>{
+      //   console.log(data);
+        
+      // })
     }
   },
   computed: {

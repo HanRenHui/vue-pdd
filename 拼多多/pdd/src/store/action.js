@@ -11,7 +11,8 @@ import {
   DELETE,
   CHECKONE,
   ALLSELECT,
-  GETSEARCHLIST
+  GETSEARCHLIST,
+  GETDETAIL
 } from './mutation-type';
 
 import {
@@ -22,7 +23,8 @@ import {
   requireRecommend,
   is_login,
   edit_login,  
-  requireSearchList
+  requireSearchList,
+  requireDetil
 } from './../api/index';
 
 
@@ -120,7 +122,15 @@ export default {
   // 全选
   selectAll({commit}, allCheckFlag){
     commit(ALLSELECT, allCheckFlag);
+  },
+  // 请求详情页内容
+  async getDetailContent({commit}, {goods_id}){
+      let result = await requireDetil({goods_id});
+      console.log(result);
+      
+      // if(result.status === 200){
+      //   let data = result.data;
+      //   commit(GETDETAIL, data);
+      // }
   }
-  ,
-
 }

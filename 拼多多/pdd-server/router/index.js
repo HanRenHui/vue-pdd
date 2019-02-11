@@ -32,4 +32,6 @@ router.get('/api/searchList', (req, res, next)=> {
   res.json(data);
 });
 
+
+
 export default router;
