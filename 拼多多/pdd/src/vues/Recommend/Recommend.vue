@@ -27,7 +27,6 @@
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
 import login_select from './../Login/Login_select';
-import axios from 'axios'
   import Scroll from './../../components/mescroll/Scroll';
 
 export default {

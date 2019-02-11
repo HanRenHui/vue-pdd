@@ -1,15 +1,7 @@
 <template>
   <div class="setCenter">
     <!-- 头部导航 -->
-    <section class="set-header clearfix">
-      <div class="middle">
-        <div class="middle-content">设置</div>
-      </div>
-      <div class="left">
-        <span @click="$router.replace('/me')"></span>
-      </div>
-      <!-- <div class="right">右边</div> -->
-    </section>
+    <CommonHeader title="设置" path = '/me'/>
   <!-- 个人信息 -->
     <section class="userInfo">
       <div class="userInfo-left">
@@ -23,7 +15,7 @@
           <span v-else>请填写手机号</span>
         </div>
       </div>
-      <div class="userInfo-right">更多</div>
+      <div class="userInfo-right" @click="$router.replace('/edit')">编辑</div>
     </section>
     <!-- 账户安全 -->
     <section class="safe">
@@ -63,8 +55,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {MessageBox} from 'mint-ui';
-import {mapState} from 'vuex';
+import { MessageBox, Toast } from 'mint-ui'
+import { mapState } from 'vuex'
+import CommonHeader from '@/components/CommonHeader'
+
 export default {
   data() {
     name: 'set-center'
@@ -100,7 +94,7 @@ export default {
     }
   },
   components: {
-    
+    CommonHeader
   },
   computed: {
     ...mapState([
@@ -129,36 +123,6 @@ base()
   height 100%
   background #f5f5f5
   overflow hidden
-  .set-header   
-    width 100%
-    height 5rem
-    .middle   
-      float left
-      width 100%
-      height 100%
-      .middle-content 
-        height 100%
-        text-align center
-        line-height 5rem
-        margin 0 3rem
-        font-size 1.8rem
-        font-family '微软雅黑'
-    .left   
-      display flex
-      align-items center;
-      justify-content center
-      float left
-      margin-left -100%
-      width 3rem
-      height 100%
-      padding-left 1rem
-      span 
-        width 2.3rem
-        height 2.9rem
-        background  url("./images/sprites.png") no-repeat -3.45rem 0
-        background-size 30rem 
-        
-
     .right
       float left
       margin-left -3rem
@@ -194,6 +158,13 @@ base()
       font-size 1.7rem 
       color gray 
       font-family '微软雅黑'
+      border 2px solid gray 
+      padding 1rem 
+      padding-top .6rem
+      padding-bottom .6rem
+      border-radius .8rem
+      &:active 
+        background-color #e0e0e0
   .safe
     background #fff 
     padding()

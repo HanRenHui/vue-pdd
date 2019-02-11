@@ -21,8 +21,6 @@ router.post('/api/login/login_code', (req, res)=>{
   delete req.session.cpatcha;
   
   user.findOne({name: req.body.name}, (error, doc)=>{
-    console.log(doc.password);
-    
     // 如果已经注册过
     if(doc){
       if(req.body.password !== doc.password){
@@ -39,14 +37,18 @@ router.post('/api/login/login_code', (req, res)=>{
           message: '登陆成功',
           _id: doc._id,
           name: doc.name || '',
-          phone: doc.phone || ''
+          phone: doc.phone || '',
+          gender: doc.gender ,
+          address: doc.address,
+        birthday: doc.birthday
+
         });
       }
     }else {
       
       // 如果没注册过
       user.create(
-        {name: req.body.name, password: req.body.password}
+        {name: req.body.name, password: req.body.password, gender: '男', address: '', birthday: ''}
       );
       req.session.userId = doc._id;
       res.json({
@@ -54,7 +56,10 @@ router.post('/api/login/login_code', (req, res)=>{
         message: '首次登陆，成功注册',
         _id: doc._id,
         name: doc.name || '',
-        phone: doc.phone || ''
+        phone: doc.phone || '',
+        gender: doc.gender,
+        address: doc.address,
+        birthday: doc.birthday
       });
 
     }
@@ -124,13 +129,19 @@ router.post('/api/login/phone', (req, res) => {
         status: 200,
         message: '登陆成功',
         phone: req.body.phone,
-        name: doc.name || ''
+        name: doc.name || '',
+        gender: doc.gender,
+        address: doc.address,
+        birthday: doc.birthday
       });
     }else {
-      console.log(-1);
       
       user.create({
         phone: req.body.phone,
+        gender: '男',
+        name: '',
+        address: '',
+        birthday: ''
       }, (err,doc)=>{
       req.session.userId = doc._id;
         res.json({
@@ -138,7 +149,10 @@ router.post('/api/login/phone', (req, res) => {
           message: '首次手机登录，注册成功',
           phone: req.body.phone,
           name: doc.nama || '',
-          _id: doc._id
+          _id: doc._id,
+          gender: doc.gender,
+          address: doc.address,
+          birthday: doc.birthday
         });
       });
       
@@ -155,7 +169,10 @@ router.get('/api/islogin', (req, res) => {
       res.json({
         _id: doc._id,
         name: doc.name,
-        phone: doc.phone
+        phone: doc.phone,
+        gender: doc.gender,
+        address: doc.address,
+        birthday: doc.birthday
       });
     }else {
       delete req.session.userId;

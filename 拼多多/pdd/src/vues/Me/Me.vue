@@ -2,8 +2,6 @@
   <div class="me">
     <LoginSelect v-if="!User._id" />
     <Center v-else/>
-
-
   </div>
 </template>
 

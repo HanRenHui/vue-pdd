@@ -10,6 +10,7 @@ import Cart from './../vues/Cart/Cart'
 import Me from './../vues/Me/Me'
 import Login from './../vues/Login/Login.vue'
 import LoginCenter from './../vues/SetCenter/setCenter.vue'
+import Edit from './../vues/Edit/edit.vue'
 
 // 主页的二级路由 懒加载的方式
 
@@ -42,6 +43,7 @@ export default new VueRouter({
     {path: '/login', component: Login},
     {path: '/me', component: Me, meta: {showTab: true}},
     {path: '/', redirect: '/home'},
-    {path: '/set', component: LoginCenter}
+    {path: '/set', component: LoginCenter},
+    {path: '/edit', component: Edit}
   ]
 });

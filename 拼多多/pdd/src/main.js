@@ -15,7 +15,11 @@ import '@/common/style.css'
 // 引入懒加载
 import vueLazyLoad from 'vue-lazyload'
 
-import loading from './common/images/lazy.png'
+import loading from './common/images/lazy.png' 
+
+import { Actionsheet } from 'mint-ui';
+
+Vue.component(Actionsheet.name, Actionsheet);
 Vue.use(vueLazyLoad,{
   loading
 });

@@ -11,7 +11,6 @@
               <!-- 17336624466 -->
                 请填写电话号码
             </p>
-          
             <span>勋章墙 ></span>
           </div>
         </div>
@@ -139,15 +138,15 @@ export default {
   },
   filters: {
     userPhone(phone){
-      let tempArr = phone.split('');
-      let newArr = [];
+      let tempArr = phone.split('')
+      let newArr = []
       tempArr.forEach((value, index)=>{
         if(index >= 3 && index <= 6){
-          value = '*';
+          value = '*'
         }
         newArr.push(value)
       });
-      return newArr.join('');
+      return newArr.join('')
     }
   },
   methods: {

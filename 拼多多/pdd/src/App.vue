@@ -29,13 +29,23 @@ export default {
   watch: {
     '$route'(to, from){
       // 个人页切到设置页
-      if(to.path === '/set'){
+      if (from.path === '/me' && to.path === '/set') {
         this.transName = 'fold-left';
         this.displayFlag = true;
         // 设置页切到个人页
-      }else if(from.path === '/set'){
+      } else if (from.path === '/set' && to.path === '/me') {
+
         this.transName = 'fold-right';
-      }else{
+
+      } else  if(from.path === '/set' && to.path === '/edit') {
+
+        this.transName = 'fold-left';
+
+      } else if (from.path === '/edit' && to.path === '/set'){
+
+        this.transName = 'fold-right';
+
+      } else {
         // 其他的页面切换
         this.transName = 'fade';
         this.displayFlag = false;
