@@ -11,6 +11,8 @@ import bodyParser from 'body-parser'
 // 引入session
 import session from 'express-session'
 
+import cartRouter from './../router/cart'
+import { cart } from '../moudels/cartMoudle';
 
 const app = express();
 
@@ -51,6 +53,8 @@ app.use(captchaRouter);
 // 登陆注册等功能
 app.use(userRouter);
 
+// 购物车相关功能
+app.use(cartRouter);
 
 app.listen(1688,()=>{
   console.log('服务器运行成功');

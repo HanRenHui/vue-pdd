@@ -17,7 +17,7 @@ export default {
   data(){
     return {
       transName: '',
-      displayFlag: false
+      displayFlag: false,
     }
   },
   components: {
@@ -25,6 +25,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('checkisLogin');
+    // 请求购物车数量
   },
   watch: {
     '$route'(to, from){

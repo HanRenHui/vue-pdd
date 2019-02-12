@@ -14,11 +14,12 @@
               <span class="price">￥{{good.price/100}}</span>
               <span class="sales_tip">{{good.sales_tip}}</span> 
             </div>
-            <button class="item-b-right">发现 ></button>
+            <button class="item-b-right" @click="addCart(good)">加入购物车</button>
           </div>
         </div>
       <!-- </keep-alive> -->
     </div>  
+    <div class="num">3</div>
   </scroll>
 
   <login_select v-else/>
@@ -27,7 +28,9 @@
 <script type="text/ecmascript-6">
 import {mapState} from 'vuex';
 import login_select from './../Login/Login_select';
-  import Scroll from './../../components/mescroll/Scroll';
+import Scroll from './../../components/mescroll/Scroll';
+import { req_add_cart } from '@/api/index.js'
+import { Toast } from 'mint-ui'
 
 export default {
   name: 'Recommend',
@@ -45,7 +48,6 @@ export default {
   },
   methods: {
     upCallback (page) {
-      
       const SIZE = 20;
       this.$store.dispatch('recommendList', {
         params: {
@@ -63,9 +65,20 @@ export default {
             this.$refs.mescroll.endErr();
           }
         }
-      });
+      }); 
+    },
+    // 添加购物车
+    async addCart(good) {
+      good.userId = this.User._id;
+      let params = good;
+      console.log(params);
 
-     
+      let result = await req_add_cart(params);
+      let { status, data} = result;
+      if(status === 200){
+        // console.log(data);
+        
+      }
     }
   
   },
@@ -79,6 +92,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  
   .recommend 
     width 100%
     background #f5f5f5
@@ -88,8 +102,10 @@ export default {
     flex-wrap wrap
     justify-content space-between
     .rec-item
+      position relative
       width 49.5%
       background #fff
+      height 30rem
       p 
         padding .5rem
         box-sizng border-box
@@ -106,10 +122,15 @@ export default {
         font-size 1.2rem
         margin-left 1rem
       .item-bottom 
+        position absolute
+        width 100%
+        left 0
+        bottom 1rem
         display flex
-        justify-content space-between
-        margin .5rem 0
+        justify-content space-around
         .item-b-left
+          height 3rem 
+          line-height 3rem
           .price 
             color red
             font-weight bolder
@@ -121,8 +142,12 @@ export default {
           border 1px solid #ccc
           background #fff
           color #000
-          border-top-left-radius 1rem
-          border-bottom-left-radius 1rem
-          width 6rem
-          height 2.5rem
+          border-radius .8rem
+          background #e02e24
+          color #fff
+          width 10rem
+          height 3rem
+          &:active 
+            background red
+            outline none
 </style>

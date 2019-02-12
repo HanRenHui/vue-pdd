@@ -37,6 +37,9 @@ const edit_login = ()=> ajax(BASE_URL + '/api/edit_login');
 // 修改个人信息
 const req_edit_info = (params) => ajax(BASE_URL + '/api/editinfo', params, 'POST');
 
+// 添加购物车
+const req_add_cart = (params) => ajax(BASE_URL + '/api/addCart', params, 'POST');
+
 const PDD_URL = '/api';
 
 // 请求推荐列表
@@ -79,5 +82,6 @@ export {
   edit_login,
   requireSearchList,
   requireSearchHot,
-  req_edit_info
+  req_edit_info,
+  req_add_cart
 };

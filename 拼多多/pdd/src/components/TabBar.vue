@@ -7,6 +7,7 @@
       :title=url.title
       :select=ischecked(index)
       :path=url.path
+      :showNum=url.showNum
     />
   </div>
 </template>

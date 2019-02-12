@@ -1,7 +1,8 @@
 <template>
-  <div class="tab-item" @click="changeRul(path)">
+  <div :class="{'tab-item': true, showNum: showNum}" @click="changeRul(path)">
     <img :src="imgSrc" alt="">
     <span :class="{selected: select}">{{title}}</span> 
+    <i v-if="showNum && $store.state.cartNum">{{$store.state.cartNum}}</i>
   </div>
 </template>
 
@@ -12,11 +13,13 @@ export default {
     imgSrc: String,
     select: Boolean,
     title: String,
-    path: String
+    path: String,
+    showNum: Boolean,
+    Num: Number
   },
   methods: {
     // 改变路由
-     changeRul(path){
+     changeRul(path) {
       this.$router.replace(path);
     }
   }
@@ -24,6 +27,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .showNum 
+    position relative
   .tab-item 
     display flex
     flex-direction column
@@ -37,4 +42,15 @@ export default {
     width 2.5rem
   .selected 
     color red
+  i 
+    position absolute
+    top -0.5rem 
+    right 1rem
+    width 2rem
+    height 2rem
+    border-radius 50%
+    background #e02e24
+    text-align center
+    line-height 2rem
+    color #fff
 </style>

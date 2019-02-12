@@ -4,31 +4,40 @@
       "normalSrc": "http://localhost:1688/images/icon_home.png", 
       "checkedSrc": "http://localhost:1688/images/icon_home_selected.png",
       "title": "首页", 
-      "path": "/home"
+      "path": "/home",
+      "showNum": false
     },
     {
       "normalSrc": "http://localhost:1688/images/icon_intro.png", 
       "checkedSrc": "http://localhost:1688/images/icon_intro_selected.png", 
       "title": "推荐",
-      "path": "/recommend"
+      "path": "/recommend",
+      "showNum": false
+
     },
     {
       "normalSrc": "http://localhost:1688/images/icon_search.png", 
       "checkedSrc": "http://localhost:1688/images/icon_search_selected.png",
       "title": "搜索", 
-      "path": "/search"
+      "path": "/search",
+      "showNum": false
+
     },
     {
       "normalSrc": "http://localhost:1688/images/icon_chat.png",
       "checkedSrc": "http://localhost:1688/images/icon_chat_selected.png",
       "title": "购物车", 
-      "path": "/cart"
+      "path": "/cart",
+      "showNum": true
+
     },
     {
       "normalSrc":  "http://localhost:1688/images/icon_mine.png",
       "checkedSrc":  "http://localhost:1688/images/icon_mine_selected.png",
       "title": "个人中心", 
-      "path": "/me"
+      "path": "/me",
+      "showNum": false
+
     }
   ]
 }
