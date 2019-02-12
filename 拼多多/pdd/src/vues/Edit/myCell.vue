@@ -1,7 +1,7 @@
 <template>
     <li class="myCell" @click="handleClick()">
       <span><i v-if="!data"></i>{{title}}</span>
-      <span>{{data}}</span>
+      <input type="text" v-model="data" readonly> 
     </li>
 </template>
 
@@ -53,6 +53,13 @@ li
         height .8rem
         background #e02e24
         border-radius 50%
-    &:last-child 
-      color gray
+  input 
+    color gray 
+    background transparent 
+    border none
+    outline none
+    font-size 1.6rem
+    width 11rem
+    overflow hidden
+    text-align right
 </style>

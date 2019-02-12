@@ -167,7 +167,9 @@ export default {
         this.$store.dispatch('rewriteUserInfo', {
           _id: data._id,
           name: data.name,
-          phone: data.phone
+          phone: data.phone,
+          address: data.address,
+          gender: data.gender
         });
         // 路由跳转
         this.$router.back();

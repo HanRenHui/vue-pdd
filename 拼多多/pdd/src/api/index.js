@@ -34,8 +34,10 @@ const is_login = () => ajax(BASE_URL + '/api/islogin');
 // 退出登录
 const edit_login = ()=> ajax(BASE_URL + '/api/edit_login');
 
+// 修改个人信息
+const req_edit_info = (params) => ajax(BASE_URL + '/api/editinfo', params, 'POST');
 
-const PDD_URL = '/api'
+const PDD_URL = '/api';
 
 // 请求推荐列表
 const requireRecommend = (params, callback)=> ajax(PDD_URL + '/proxy/api/api/barrow/query', params, callback);
@@ -62,7 +64,6 @@ const requireGoodsList = ()=> ajax(PDD_URL + '/proxy/api/api/alexa/v1/goods', {
 
 
 // 请求详情页
-const requireDetil = (params) => ajax(PDD_URL + '/api/tesla/query', params);
 
 export {
   requireTabData,
@@ -78,5 +79,5 @@ export {
   edit_login,
   requireSearchList,
   requireSearchHot,
-  requireDetil
+  req_edit_info
 };

@@ -189,4 +189,30 @@ router.get('/api/edit_login', (req, res)=> {
     message: '退出成功'
   });
 });
+
+// 修改个人信息
+router.post('/api/editinfo', (req, res) => {
+  let { _id, sex, address, birthday, name } = req.body;
+
+  user.update({_id}, {$set: {name, gender: sex, address, birthday, name}},  err => {
+    if(!err) {
+      
+      return res.json({
+        status: 200,
+        message: '更新成功',
+        _id,
+        sex,
+        address,
+        birthday,
+        name
+      });
+    }
+  });
+  // user.update({name: ""},{$set: {
+  //   sex,
+  //   address,
+  //   birthday,
+  //   name
+  // }});
+});
 export default router;

@@ -24,13 +24,13 @@ import {
   is_login,
   edit_login,  
   requireSearchList,
-  requireDetil
+  req_edit_info
 } from './../api/index';
 
 
 export default {
   // 请求tab
-  async reqTab({commit}){
+  async reqTab({commit}) {
     const tabDate = await requireTabData();
     if(tabDate.status === 200){
       let data = tabDate.data;
@@ -38,7 +38,7 @@ export default {
     }
   },
   // 请求轮播图图片
-  async reqCarou({commit}){
+  async reqCarou({commit}) {
     const CarouData = await requireCarData();
     
     if(CarouData.status === 200){
@@ -48,7 +48,7 @@ export default {
   },
 
   // 请求hotnav的数据
-  async reqHotNav({commit}){
+  async reqHotNav({commit}) {
     const HotNavData = await requireHotNav();
     if(HotNavData.status === 200){
       let data = HotNavData.data;
@@ -56,7 +56,7 @@ export default {
     }
   },
   //请求首页的goodslist
-  async goodsList({commit}){
+  async goodsList({commit}) {
     const goods = await requireGoodsList();
     if(goods.status === 200){
       let data = goods.data;
@@ -65,7 +65,7 @@ export default {
     }
   },
   // 请求搜索列表
-  async searchList({commit}){
+  async searchList({commit}) {
     const result = await requireSearchList();
     if(result.status === 200){
       let data = result.data;
@@ -74,7 +74,7 @@ export default {
   },
 
   // 请求推荐列表
-  async recommendList({commit}, obj){
+  async recommendList({commit}, obj) {
     let callback = obj.callback;
     const result = await requireRecommend(obj.params, obj.callback);
     if(result.status === 200){
@@ -85,12 +85,12 @@ export default {
   },
 
   // 更新前端用户信息
-  rewriteUserInfo({commit}, info){
+  rewriteUserInfo({commit}, info) {
     
     commit(REWRITE, info);
   },
 
-  async checkisLogin({commit}){
+  async checkisLogin({commit}) {
     
     let result = await is_login();
     if(result.status === 200){
@@ -99,38 +99,29 @@ export default {
     }
   },
   // 推出登陆
-  async edit_login({commit}){
+  async edit_login({commit}) {
     let result = await edit_login();  
     if(result.status === 200){
       commit(EDIT);
     }
   },
   // 更新数量
-  resetCount({commit}, {index, flag}){
+  resetCount({commit}, {index, flag}) {
     commit(CHANGECOUNT, {index, flag});
   },
 
   // 删除一件商品
-  deleteGood({commit}, index){
+  deleteGood({commit}, index) {
     commit(DELETE, index);
   },
 
   // 更改选中状态
-  check({commit}, index){
+  check({commit}, index) {
     commit(CHECKONE, index);
   },
   // 全选
-  selectAll({commit}, allCheckFlag){
+  selectAll({commit}, allCheckFlag) {
     commit(ALLSELECT, allCheckFlag);
   },
-  // 请求详情页内容
-  async getDetailContent({commit}, {goods_id}){
-      let result = await requireDetil({goods_id});
-      console.log(result);
-      
-      // if(result.status === 200){
-      //   let data = result.data;
-      //   commit(GETDETAIL, data);
-      // }
-  }
+  
 }
