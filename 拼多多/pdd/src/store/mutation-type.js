@@ -12,6 +12,10 @@ const CHECKONE = 'checkone';
 const ALLSELECT = 'allselect';
 const GETSEARCHLIST = 'getsearchlist';
 const GETDETAIL = 'getdetail';
+const CARTCOUNT = 'cartcount';
+const ADDONE = "addone";
+const GETCARTDATA = 'getcartdata';
+
 
 export {
   TAB_DATA,
@@ -27,5 +31,8 @@ export {
   CHECKONE,
   ALLSELECT,
   GETSEARCHLIST,
-  GETDETAIL
+  GETDETAIL,
+  CARTCOUNT,
+  ADDONE,
+  GETCARTDATA
 };

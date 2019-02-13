@@ -11,7 +11,7 @@
 
 <script>
 import Tab from './components/TabBar'
-
+import {mapState} from 'vuex'
 export default {
   name: 'App',
   data(){
@@ -25,7 +25,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch('checkisLogin');
-    // 请求购物车数量
+    
+    
+    
+  },
+  computed: {
+    ...mapState([
+      'User'
+    ])
   },
   watch: {
     '$route'(to, from){
@@ -52,6 +59,12 @@ export default {
         this.displayFlag = false;
       }
       
+    },
+    User() {
+      // 请求购物车数量
+      this.$store.dispatch('setCartNum', this.User._id);
+      // 拿到购物车数据
+      this.$store.dispatch('getCart', this.User._id);      
     }
   }
   

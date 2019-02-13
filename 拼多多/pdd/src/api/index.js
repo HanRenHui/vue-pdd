@@ -40,6 +40,18 @@ const req_edit_info = (params) => ajax(BASE_URL + '/api/editinfo', params, 'POST
 // 添加购物车
 const req_add_cart = (params) => ajax(BASE_URL + '/api/addCart', params, 'POST');
 
+// 请求购物车数量
+const req_cart_num = (params) => ajax(BASE_URL + '/api/cartcount', params);
+
+//请求购物车数据
+const req_cart_data = (params) => ajax(BASE_URL + '/api/cartdata', params);
+
+// 删除购物车数据
+const req_del_cartbyId =(params) => ajax(BASE_URL + '/api/delcart', params);
+
+// 更改购物车中商品的count
+const req_set_count = (params) => ajax(BASE_URL + '/api/setcount', params);
+
 const PDD_URL = '/api';
 
 // 请求推荐列表
@@ -83,5 +95,9 @@ export {
   requireSearchList,
   requireSearchHot,
   req_edit_info,
-  req_add_cart
+  req_add_cart,
+  req_cart_num,
+  req_cart_data,
+  req_del_cartbyId,
+  req_set_count
 };

@@ -14,12 +14,11 @@
               <span class="price">￥{{good.price/100}}</span>
               <span class="sales_tip">{{good.sales_tip}}</span> 
             </div>
-            <button class="item-b-right" @click="addCart(good)">加入购物车</button>
+            <span class="item-b-right" @click="addCart(good)">＋</span>
           </div>
         </div>
       <!-- </keep-alive> -->
     </div>  
-    <div class="num">3</div>
   </scroll>
 
   <login_select v-else/>
@@ -69,15 +68,23 @@ export default {
     },
     // 添加购物车
     async addCart(good) {
+
       good.userId = this.User._id;
       let params = good;
-      console.log(params);
 
       let result = await req_add_cart(params);
       let { status, data} = result;
       if(status === 200){
-        // console.log(data);
-        
+        Toast({
+          message: data.message
+        }); 
+        if(data.status === 200) {
+           // cartNum 加一
+          this.$store.dispatch('incCartNum');  
+        }
+        // 重新获取购物车数据
+        this.$store.dispatch('getCart', this.User._id);
+
       }
     }
   
@@ -92,7 +99,16 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  
+  .ball-outer .ball-inner 
+    position absolute
+    transition all 1s
+    width 2rem
+    height 4rem
+    background #e02e24
+  .ball-outer
+    transition-timing-function ease
+  .ball-inner 
+    transition-timing-function ease
   .recommend 
     width 100%
     background #f5f5f5
@@ -127,7 +143,7 @@ export default {
         left 0
         bottom 1rem
         display flex
-        justify-content space-around
+        justify-content space-between
         .item-b-left
           height 3rem 
           line-height 3rem
@@ -139,14 +155,18 @@ export default {
           .sales_tip
             color #ccc
         .item-b-right
-          border 1px solid #ccc
-          background #fff
-          color #000
-          border-radius .8rem
+          width 2rem
+          height 2rem
+          border-radius 50%
           background #e02e24
           color #fff
-          width 10rem
-          height 3rem
+          text-align center
+          line-height 2rem
+          font-size 1.8rem
+          font-weight bolder
+          margin-right 1rem
+          &:active 
+            background red
           &:active 
             background red
             outline none

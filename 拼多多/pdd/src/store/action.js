@@ -12,7 +12,10 @@ import {
   CHECKONE,
   ALLSELECT,
   GETSEARCHLIST,
-  GETDETAIL
+  GETDETAIL,
+  CARTCOUNT,
+  ADDONE,
+  GETCARTDATA
 } from './mutation-type';
 
 import {
@@ -24,7 +27,10 @@ import {
   is_login,
   edit_login,  
   requireSearchList,
-  req_edit_info
+  req_cart_num,
+  req_cart_data,
+  req_del_cartbyId,
+  req_set_count
 } from './../api/index';
 
 
@@ -106,13 +112,23 @@ export default {
     }
   },
   // 更新数量
-  resetCount({commit}, {index, flag}) {
+  async resetCount({commit}, {index, flag, user_id, goods_id}) {
+    let result = await req_set_count({user_id, goods_id, flag});
+    let { status, data} = result;
+    if(status === 200){
     commit(CHANGECOUNT, {index, flag});
+    }
   },
 
   // 删除一件商品
-  deleteGood({commit}, index) {
-    commit(DELETE, index);
+  async deleteGood({commit}, params) {
+    let result = await req_del_cartbyId(params);
+    // commit(DELETE, data);
+    let {status, data} = result;
+    let index = params;
+    if(status === 200) {
+      commit(DELETE, index);
+    }
   },
 
   // 更改选中状态
@@ -123,5 +139,27 @@ export default {
   selectAll({commit}, allCheckFlag) {
     commit(ALLSELECT, allCheckFlag);
   },
-  
+  // 更新state里的cartNum
+  async setCartNum({commit}, userId){
+    let result = await req_cart_num({userId});
+    let { status, data} = result;
+    if(status === 200){
+      let count = data.count;
+      commit(CARTCOUNT, count);
+      
+    }
+  },
+  // cartNum + 1
+  incCartNum({commit}){
+    commit(ADDONE);
+  },
+  // 获得购物车数据
+  async getCart({commit}, user_id) {
+    let result = await req_cart_data({userId: user_id});
+    let { status, data} = result;
+    if(status === 200) {
+      commit(GETCARTDATA, data.data);
+    }
+  }
+
 }

@@ -12,9 +12,11 @@ import {
   CHECKONE,
   ALLSELECT,
   GETSEARCHLIST,
-  GETDETAIL
+  GETDETAIL,
+  CARTCOUNT,
+  ADDONE,
+  GETCARTDATA
 } from './mutation-type';
-
 
 export default {
   [TAB_DATA](state, {data}){
@@ -68,6 +70,7 @@ export default {
   },
   
   [DELETE](state, index){
+
     state.cartGoods.splice(index, 1);
   },
 
@@ -85,9 +88,19 @@ export default {
     state.SearchList = data.data;
   },
 
-  [GETDETAIL](state, data){
-    console.log(data);
+  // [GETDETAIL](state, data){
+  //   console.log(data);
+    
+  // },
+  [CARTCOUNT](state, data) {
+    state.cartNum = data;
+  },
+  [ADDONE](state) {
+    state.cartNum = state.cartNum + 1;
+  },
+
+  [GETCARTDATA](state, data) {
+    state.cartGoods = data;
     
   }
-
 }

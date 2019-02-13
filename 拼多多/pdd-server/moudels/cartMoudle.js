@@ -8,7 +8,8 @@ let cartSchema = new mongoose.Schema({
   thumb_url: String,
   price: String, 
   buy_count: Number, 
-  is_pay: Boolean
+  is_pay: Boolean,
+  checked: Boolean
 });
 let cart = mongoose.model('cart', cartSchema);
 

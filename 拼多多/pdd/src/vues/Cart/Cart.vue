@@ -18,7 +18,7 @@
           <div class="list_con_left">
             <a
               href="javascript:;"
-              :class="{cart_check_box:true, checked:goods.checked}"
+              :class="{cart_check_box:true, checked: goods.checked}"
               @click='changeChecked(index)'
             ></a>
           </div>
@@ -32,11 +32,11 @@
               <p class="shop_price"></p>
               <div class="shop_deal">
                 <div class="shop_deal_left">
-                  <span @click="Count(index, false)">-</span>
+                  <span @click="Count(index, false, goods)">-</span>
                   <input type="tel" value="1" readonly='readonly' v-model='goods.buy_count'>
-                  <span @click="Count(index, true)">+</span>
+                  <span @click="Count(index, true, goods)">+</span>
                 </div>
-                <div class="shop_deal_right" @click="deleteOne(index)">
+                <div class="shop_deal_right" @click="deleteOne(goods, index)">
                   <span></span>
                   <span></span>
                 </div>
@@ -98,10 +98,10 @@ export default {
       }
     },
     money: {
-      get(){
+      get() {
         let total = 0;
         this.cartGoods.forEach(good => {
-          if(good.checked){
+          if(good.checked) {
             total += good.price*good.buy_count;
           }
         });
@@ -109,28 +109,36 @@ export default {
       }
     }
   },
+  watch: {
+   
+  },
+
   methods: {
 
     // 数量改变
-    Count(index, flag){
-      this.$store.dispatch('resetCount', {index, flag});
+    Count(index, flag, goods) {
+      
+      this.$store.dispatch('resetCount', {index, flag, user_id: this.User._id, goods_id: goods.goods_id});
     },
 
     // 删除一件商品
-    deleteOne(index){
-      MessageBox.alert('您确定删除该商品么!').then(action => {
-       this.$store.dispatch('deleteGood', index);  
+    deleteOne(goods, index) {
+      MessageBox.confirm('您确定删除该商品么!').then(action => {
+          let goods_id = goods.goods_id;
+
+       this.$store.dispatch('deleteGood', {goods_id, user_id: this.User._id, index});  
       });
     },
     // 改变选中状态
-    changeChecked(index){
+    changeChecked(index) {
       this.$store.dispatch('check', index);
     },
     // 全选
-    allCheck(){
-      this.allCheckFlag = !this.allCheckFlag
+    allCheck() {
+      this.allCheckFlag = !this.allCheckFlag;
       this.$store.dispatch('selectAll', this.allCheckFlag);
-    }
+    },
+  
   }
 }
 </script>
